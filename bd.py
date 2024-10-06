@@ -19,7 +19,7 @@ cursor.execute("""
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS formapago(
     id_pago INTEGER PRIMARY KEY AUTOINCREMENT,
-    pago VARCHAR (20),
+    pago VARCHAR(20)
     );
     """)
 
@@ -29,7 +29,7 @@ cursor.execute("""
     id_mesas INTEGER PRIMARY KEY AUTOINCREMENT,
     estatus INTEGER NOT NULL,
     id_prod_FK INTEGER,
-    FOREIGN KEY(id_prod_FK) REFERENCE producto(id_prod)
+    FOREIGN KEY(id_prod_FK) REFERENCES producto(id_prod)
     );
     """)
 
@@ -37,13 +37,13 @@ cursor.execute("""
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS ticket(
     id_ticket INTEGER PRIMARY KEY AUTOINCREMENT,
-    total FLOAT NOT NULL
+    total FLOAT NOT NULL,
     id_prod_FK INTEGER,
     id_pago_FK INTERGER,
     id_mesa_FK INTEGER,
-    FOREIGN KEY(id_prod_FK) REFERENCE producto(id_prod),
-    FOREIGN KEY(id_pago_FK) REFERENCE formapago(id_pago),
-    FOREIGN KEY(id_mesa_FK) REFERENCE mesas(id_mesas),
+    FOREIGN KEY(id_prod_FK) REFERENCES producto(id_prod),
+    FOREIGN KEY(id_pago_FK) REFERENCES formapago(id_pago),
+    FOREIGN KEY(id_mesa_FK) REFERENCES mesas(id_mesas)
     );
     """)
 

@@ -1,5 +1,5 @@
 from tools import limpiar_pantalla, seguir
-from menu import crear_producto
+from menu import borrar_producto, crear_producto
 # from bd import conexion, cursor
 
 def inicio_menu_productos():
@@ -26,7 +26,8 @@ def inicio_menu_productos():
             case 2:
                 pass
             case 3:
-                pass
+                borrar_producto()
+                seguir()
             case 4:
                 pass
             case _:
