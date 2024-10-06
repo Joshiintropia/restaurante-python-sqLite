@@ -18,7 +18,7 @@ cursor.execute("""
 #Creamos la tabla FORMA DE PAGO
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS formapago(
-    id_pago PRIMARY KEY AUTOINCREMENT,
+    id_pago INTEGER PRIMARY KEY AUTOINCREMENT,
     pago VARCHAR (20),
     );
     """)
@@ -26,7 +26,7 @@ cursor.execute("""
 #Creamos la tabla MESAS
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS mesas(
-    id_mesas PRIMARY KEY AUTOINCREMENT,
+    id_mesas INTEGER PRIMARY KEY AUTOINCREMENT,
     estatus INTEGER NOT NULL,
     id_prod_FK INTEGER,
     FOREIGN KEY(id_prod_FK) REFERENCE producto(id_prod)
@@ -36,7 +36,7 @@ cursor.execute("""
 #Creamos la tabla de relación TICKET
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS ticket(
-    id_ticket PRIMARY KEY AUTOINCREMENT,
+    id_ticket INTEGER PRIMARY KEY AUTOINCREMENT,
     total FLOAT NOT NULL
     id_prod_FK INTEGER,
     id_pago_FK INTERGER,
