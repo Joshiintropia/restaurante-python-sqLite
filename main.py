@@ -1,2 +1,5 @@
+from bd import conexion, cursor
 
-print("Hola mundo")
+if __name__=="__main__":
+
+    pass
