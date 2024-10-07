@@ -34,14 +34,75 @@ def crear_producto():
 
 #READ
 def mostrar_productos():
-    pass
+    resultado = cursor.execute("SELECT * FROM producto").fetchall()
+    print("{:<4} {:<20} {:<10}".format("ID", "PRODUCTO", "PRECIO"))
+    for row in resultado:
+        id, producto, precio = row[0], row[1], row[2]
+        print("{:<4} {:<20} {:<10}".format(id, producto, precio))
+
 
 def mostrar_producto():
-    pass
+    try:
+        id = int(input("Ingresa el id del producto a visualizar: "))
+        resultado = cursor.execute(f"SELECT * FROM producto WHERE id_prod = {id}").fetchone()
+        if resultado != None:
+            print("{:<2} | {:<25} | {:<20}".format("ID", "PRODUCTO", "PRECIO"))
+            # for row in resultado:
+            id, producto, precio = resultado[0], resultado[1], resultado[2]
+            print("{:<2} | {:<25} | {:<20}".format(id, producto, precio))
+            return resultado
+        else:
+            print("""
+                        PRODUCTO NO ENCONTRADO
+                """)
+            mostrar_producto()
+    except ValueError:
+        print("ID desconocido, selecciona uno de la lista...")
+
 
 #UPDATE
 def actualizar_producto():
-    pass
+    mostrar_productos()
+    res = mostrar_producto()
+    id, prod, prec = res[0], res[1], res[2]
+
+    limpiar_pantalla()
+    opcion = int(input(f"""
+              Selecciona la opción
+            que desea actualizar del:
+                {prod.upper()}
+        1) NOMBRE
+        2) PRECIO
+
+    Selecciona una opción:
+        """))
+    match opcion:
+        case 1:
+            prod_nuevo = input("Ingresa el nuevo nombre del PRODUCTO: ")
+            cursor.execute(f"UPDATE producto SET nombre_producto = {prod_nuevo} WHERE id_prod = {id}")
+            print("""
+                    ====================
+                    PRODUCTO ACTUALIZADO
+                    ====================
+                """)
+            conexion.commit()
+        case 2:
+            prec_nuevo = float(input("Ingresa el nuevo precio del PRODUCTO: "))
+            cursor.execute(f"UPDATE producto SET precio = {prec_nuevo} WHERE id_prod = {id}")
+            print("""
+                    ====================
+                     PRECIO ACTUALIZADO
+                    ====================
+                """)
+            conexion.commit()
+        case _:
+            print("Opción incorrecta.")
+
+    limpiar_pantalla()
+    mostrar_productos()
+
+
+    # cursor.execute(f"UPDATE producto SET")
 
 #DELETE
 def borrar_producto():
